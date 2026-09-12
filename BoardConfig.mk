@@ -74,7 +74,7 @@ ODM_MANIFEST_5G_FILES := $(DEVICE_PATH)/sku/vintf/manifest_5g.xml
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION) --os_version 16.0.0 --os_patch_level 2026-08
 
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_CMDLINE := \
@@ -155,13 +155,13 @@ TARGET_USERIMAGES_USE_F2FS := true
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # Security patch level
-BOOT_SECURITY_PATCH := 2023-02-01
+BOOT_SECURITY_PATCH := 2026-08-01
 VENDOR_SECURITY_PATCH := 2023-02-01
 
 # SEPolicy
-include device/qcom/sepolicy_vndr/SEPolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
+# omitted missing standalone dependency
+# Device sepolicy is for the full Lineage system build; recovery uses the
+# stock vendor policy supplied by the boot environment.
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -201,4 +201,41 @@ WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit the proprietary files
-include vendor/razer/nicole/BoardConfigVendor.mk
+# omitted missing standalone dependency
+
+# TWRP recovery target using the LineageOS device configuration and the
+# pulled stock kernel/modules supplied by build-twrp.sh.
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+TARGET_KERNEL_SOURCE :=
+BOARD_USES_RECOVERY_AS_BOOT := true
+TARGET_NO_RECOVERY := true
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+BOARD_AVB_ENABLE := false
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+TW_THEME := landscape_hdpi
+TW_ROTATION := 270
+RECOVERY_TOUCHSCREEN_SWAP_XY := true
+RECOVERY_TOUCHSCREEN_FLIP_Y := true
+TW_BRIGHTNESS_PATH := /sys/class/backlight/panel0-backlight/brightness
+TW_DEFAULT_BRIGHTNESS := 160
+TW_MAX_BRIGHTNESS := 255
+TW_HAS_MTP := true
+TW_FRAMERATE := 120
+TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone20/temp"
+TW_USE_LEGACY_BATTERY_SERVICES := true
+TW_CUSTOM_BATTERY_PATH := "/sys/class/power_supply/battery"
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_USE_FSCRYPT_POLICY := 2
+BOARD_USES_QCOM_FBE_DECRYPTION := true
+TW_INCLUDE_REPACKTOOLS := true
+TW_EXCLUDE_APEX := true
+TARGET_USES_LOGD := true
+TWRP_INCLUDE_LOGCAT := true
+
+BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := false
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true

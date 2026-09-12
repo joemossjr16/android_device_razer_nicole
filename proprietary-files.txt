@@ -1,4 +1,4 @@
-# Unpinned blobs from Razer/VZW-RZ45-0460/RZ45-0460:12/SKQ1.211103.001/155:user/release-keys
+# Unpinned blobs for Razer Edge 5G (nicole)
 
 # ACDB
 vendor/etc/acdbdata/HDK/lahaina-hhg-snd-card/HHG_Bluetooth_cal.acdb

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="joemossjr16/android_device_razer_nicole" path="device/razer/nicole" remote="github" revision="android-16" />
+</manifest>
