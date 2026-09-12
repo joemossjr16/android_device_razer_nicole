@@ -32,6 +32,7 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/init/init.qcom.recovery.rc:root/init.qcom.re
     $(LOCAL_PATH)/recovery/root/init.recovery.disable-services.rc:root/init.recovery.disable-services.rc \
     $(LOCAL_PATH)/recovery/root/vendor_manifest_clean.xml:root/vendor_manifest_clean.xml \
     $(LOCAL_PATH)/recovery/root/system/bin/nicole_crypto_prep.sh:recovery/root/system/bin/nicole_crypto_prep.sh \
+    $(LOCAL_PATH)/recovery/root/system/etc/twrp.flags:recovery/root/system/etc/twrp.flags \
     $(LOCAL_PATH)/recovery/root/system/bin/prepdecrypt.sh:recovery/root/system/bin/prepdecrypt.sh \
     $(LOCAL_PATH)/recovery/root/init.recovery.services.qcom_decrypt.rc:root/init.recovery.services.qcom_decrypt.rc \
     $(LOCAL_PATH)/recovery/root/init.recovery.services.qcom_decrypt.fbe.rc:root/init.recovery.services.qcom_decrypt.fbe.rc \
